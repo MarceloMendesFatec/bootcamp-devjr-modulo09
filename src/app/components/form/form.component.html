@@ -26,7 +26,7 @@
         <div class="row mt-3">
           <label for="inputCurso" class="form-label col-md-2">Cursos:</label>
           <div class="col-md-5">
-            <select class="form-select" id="inputCourse" name="curso" [(ngModel)]="objAluno.curso">
+            <select class="form-select" id="inputCourse" name="curso" [(ngModel)]="objAluno.curso" required>
               <option  *ngFor="let c of cursos" [ngValue]="c">
                 {{ c.name }}
               </option>

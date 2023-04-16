@@ -18,6 +18,17 @@
                         <th scope="col">Turno</th>
                       </tr>
                     </thead>
+                    <tbody>
+                        <tr *ngFor="let  s of students"> <!--iterando cada objeto "s" dentro do array " students"-->
+                          <td>{{s.id}}</td>
+                          <td>{{s.nome}}</td>
+                          <td>{{s.email}}</td>
+                          <td>{{s.telefone}}</td>
+                          <td>{{s.curso.name}}</td>
+                          <td>{{s.turno}}</td>
+                        </tr>
+
+                    </tbody>
                   </table>
             </section>
        </div>

@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Aluno } from 'src/app/interfaces/Aluno';
 import { Curso } from 'src/app/interfaces/Curso';
+import { AlunosService } from 'src/app/services/alunos.service';
+import { CursoService } from 'src/app/services/curso.service';
+
+
 
 @Component({
   selector: 'app-table',
@@ -9,18 +13,28 @@ import { Curso } from 'src/app/interfaces/Curso';
 })
 export class TableComponent {
 
-  cursos: Curso[] = [
-    { id: 1, name: "Java" },
-    { id: 2, name: "Angular" },
-    { id: 1, name: "Python" },
-  ];
+  constructor(private CursoService: CursoService,
+              private AlunoService: AlunosService ){}
+  // a injecao de dependencias e feita atraves do construtor
 
+  ngOnInit(): void {// servico sera inicializado aqui
+    this.students = this.AlunoService.getStudents()
+    this.CursoService.getcurso().subscribe(
+      {
+        next: data => {this.cursos = data}
+      },
+      // chama o servicoque retorna a lista de cursos
+    );
+
+  }
+
+
+  cursos: Curso[] = [];
   objAluno : Aluno = {} as Aluno;
   students : Aluno[] = [];
 
   saveStudent(){
-      this.objAluno.id = this.students.length + 1;
-      this.students.push(this.objAluno);
+      this.AlunoService.saveStudents(this.objAluno)
       this.objAluno = {} as Aluno;
       console.log(" Novo aluno cadastrado , total de alunos : " + this.students.length);
   }
